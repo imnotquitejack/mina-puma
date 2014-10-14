@@ -15,7 +15,7 @@ namespace :puma do
   set_default :pumactl_socket, -> { "#{deploy_to}/#{shared_path}/tmp/sockets/pumactl.sock" }
 
   desc 'Start puma'
-  task :start => :environment do
+  task start: :environment do
     queue! %[
       if [ -e '#{pumactl_socket}' ]; then
         echo 'Puma is already running!';
