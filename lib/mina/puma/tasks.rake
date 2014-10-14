@@ -35,6 +35,8 @@ namespace :puma do
       if [ -e '#{pumactl_socket}' ]; then
         cd #{deploy_to}/#{current_path} && #{pumactl_cmd} -S #{puma_state} stop
         rm -f '#{pumactl_socket}'
+      elif [ -e '#{puma_pid' ]; then
+        kill -QUIT `cat "#{puma_pid}"` && rm -f '#{puma_pid}'
       else
         echo 'Puma is not running!';
       fi
